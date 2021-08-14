@@ -1,0 +1,38 @@
+body {
+    background-image: url(background.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+h1 {
+    color: #d3f5df;
+    /* syntax: offset-x | offset-y | blur-radius | color */
+    text-shadow: 5px 5px 6px black;
+}
+
+h2 {
+    color: rgb(168, 214, 182);
+    text-shadow: 5px 5px 6px black;
+}
+
+/* parent child {} */
+ul li {
+    color: white;
+    font-size: 20px;
+}
+
+/* only child elements one level deep would inherit the style rule */
+ul > li {
+    color: yellow;
+}
+
+/* .container {
+    background: linear-gradient(180deg, seagreen, #d3f5df);
+    box-shadow: 20px 20px 10px rgb(8, 68, 11);
+    text-align: center;
+} */
+
+.borderImg {
+    border: 10px dashed lightyellow;
+}
+

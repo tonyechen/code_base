@@ -4,25 +4,6 @@ body {
     background-size: cover;
 }
 
-/* CSS specificity calculation:
-    style attributes > id > class, psudo-class attribute > elements */
-#foo {
-    color: red;
-}
-
-[id="foo"] {
-    color: cyan;
-}
-
-.container h1 {
-    color: white;
-}
-
-h1 {
-    color: green /*!important only use important on page specific CSS that overrides external libraries*/; 
-
-}
-
 /* you can group together anything, this can be like setting the defult styles for the elements; more specific styles can be added after this */
 h1, h2, h3, .class, #id {
     color: #d3f5df;

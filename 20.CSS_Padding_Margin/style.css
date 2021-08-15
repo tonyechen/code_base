@@ -1,0 +1,84 @@
+body {
+    /* background-image: url(background.png);
+    background-repeat: no-repeat;
+    background-size: cover; */
+    background-color: #445;
+    /* text-align: center; */
+}
+
+h1 {
+    color: #b2d0f8;
+    line-height: 2rem;
+    font-family: 'Lobster', serif, sans-serif;
+}
+
+h2 {
+    color: #b2d0f8;
+    line-height: 2rem;
+    font-family: 'MonteCarlo', serif, sans-serif;
+}
+
+h3 {
+    color: #b2d0f8;
+    line-height: 2rem;
+    font-family: 'Palette Mosaic', serif, sans-serif;
+}
+
+.formatting{
+    font-size: 25px;
+    line-height: 2em;
+    color: white;
+}
+
+a {
+    text-decoration: none;
+    font-size: 20px;
+    color:seashell;
+    letter-spacing: 10px;
+    text-transform: capitalize;
+}
+
+/* parent child {} */
+ul li {
+    color: white;
+    font-size: 20px;
+}
+
+/* only child elements one level deep would inherit the style rule */
+ul > li {
+    color: yellow;
+}
+
+/* .container {
+    background: linear-gradient(180deg, seagreen, #d3f5df);
+    box-shadow: 20px 20px 10px rgb(8, 68, 11);
+    text-align: center;
+} */
+
+/* making image responsive */
+
+img {
+    max-width: 100%;
+    height: auto;
+    padding: 5px;
+    opacity: 50%;
+    margin-bottom: 60px;
+}
+
+.borderImg {
+    border-radius: 10px;
+    width: 200px;
+    height: 200px;
+    border: 2px dashed #ddd;
+    padding: 5px;
+}
+
+button {
+    color: white;
+    background: red;
+    border-radius: 12px;
+    border: none;
+    font-size: 25px;
+    padding: 10px 20px 40px;
+}
+

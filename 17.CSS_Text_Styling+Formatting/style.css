@@ -23,11 +23,18 @@ h2 {
 
 }
 
+.formatting{
+    font-size: 25px;
+    line-height: 2em;
+    color: white;
+}
+
 a {
     text-decoration: none;
     font-size: 20px;
     color:seashell;
     letter-spacing: 10px;
+    text-transform: capitalize;
 }
 
 /* parent child {} */

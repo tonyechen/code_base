@@ -1,0 +1,11 @@
+.container {
+    border: 5px solid seagreen;
+    display: flex;
+}
+
+.items {
+    width: 500px;
+    height: 100px;
+    border: 2px solid blue;
+    min-width: 200px;
+}

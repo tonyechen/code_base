@@ -113,6 +113,23 @@ div.box {
     box-shadow: 0 0 0 1px rgba(0, 0, 0, .15), 0 2px 3px 0 rgba(0,0,0,.1);
 }
 
+button {
+    font-size: 30px;
+    font-weight: 700;
+    color: #fff;
+    background-color: #0069ff;
+    padding: 15px 60px;
+    display: block;
+    text-align: center;
+    margin: 5px;
+    border-radius: 7px;
+}
+
+button.learnMore {
+    display: block;
+    margin: auto;
+}
+
 div.icon {
     width: 100%;
 }
@@ -179,6 +196,11 @@ input[type="text"]{
     ul.topnav.responsive li a {
         display: block;
         text-align: left;
+    }
+
+    h1.section2Header {
+        font-size: 200%;
+
     }
 
     .col-6, .col-4{

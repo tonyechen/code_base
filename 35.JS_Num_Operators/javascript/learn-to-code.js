@@ -1,29 +1,27 @@
-var myAccountBalance = 300;
-var nikeSBShoes = 799.23;
-var coupon = 500;
+// var name = "Tony";
+// var age = 18;
+// var shootingScore = 45.6;
 
-// == equal to *automatically convert the datatype
-// === 
-// <= less than or equal to
-// >= greater than or equal to
+// var message = "Hi, My name is " + name + " and I am " + age + " years old!";
 
-var age = 23;
-var joesAge = "23";
+// var firstName = "John";
+// var lastName = "JacobJingleHeimerSmith";
+// var dateOfBirth = "10-09-82";
+// var age = 23;
+// var profileImgUrl = "http://coolpicks.com/johnjacob.jpg";
 
-if (age === joesAge) {
-    console.log("'m the same age as Joe!");
-} else {
-    console.log("One of these is not like the other..");
-}
+// var loginWelcomeMessage = "Welcome, " + firstName + ". Happy "+ age + "rd birthday!";
 
-if (nikeSBShoes <= myAccountBalance) {
-    myAccountBalance -= nikeSBShoes;
-    console.log("We just bought some dope shoes!");
-    console.log("Account Balance: " + myAccountBalance);
-} else if (nikeSBShoes - coupon <= myAccountBalance){
-        console.log("We just bought some dope shoes with a coupon!");
-        myAccountBalance -= nikeSBShoes - coupon;
-        console.log("Account Balance: " + myAccountBalance);
-} else {
-    console.log("You too broke for shoes bruh!")
-}
+// console.log(loginWelcomeMessage);
+
+var sum = 10 + 15;
+var sub = 15 - 10;
+var mul = 10 * 3;
+var div = 9 / 3;
+var mod = 10 % 3;
+
+var msg = "10 / 3 = 3 with a remainder of " + mod;
+
+var result = 10 * ((5 + 3) - 4) + 500;
+
+console.log(result);

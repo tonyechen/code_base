@@ -1,11 +1,30 @@
 .container {
     border: 5px solid seagreen;
-    display: flex;
+    
+    
 }
 
-.items {
-    width: 500px;
-    height: 100px;
+* {
+    margin: 0;
+}
+
+[class*="item"] {
     border: 2px solid blue;
-    min-width: 200px;
+    margin: 10px;
+    margin: left;
+}
+
+.item1 {
+    width: 100px;
+    height: 100px;
+}
+
+.item2 {
+    width: 200px;
+    height: 200px;
+}
+
+.item3 {
+    width: 300px;
+    height: 300px;
 }

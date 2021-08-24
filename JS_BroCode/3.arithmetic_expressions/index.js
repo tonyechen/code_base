@@ -16,7 +16,8 @@ var friends = 10;
 // friends -= 1;
 // friends *= 2;
 // friends /= 2;
-friends %= 3;
+// friends **= 2;
+// friends %= 3;
 
-friends **= 2;
+friends = 10 + 3 / 2;
 console.log(friends);

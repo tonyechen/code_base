@@ -13,3 +13,4 @@ function combineLetters(accumulator, value, index, array) {
 let word = letters.reduce(combineLetters);
 word = letters.reduceRight(combineLetters); // reverse
 console.log(word);
+

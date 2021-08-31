@@ -37,5 +37,9 @@ let adultStudents = students.filter(age => age >= 18);
 for(let s in adultStudents){console.log(adultStudents[s]);}
 
 // reduce()
+let letters = ["H", "E", "L", "P"];
+let word;
 
+word = letters.reduce((accumulator, currentLetter) => accumulator + currentLetter);
+console.log(word);
 

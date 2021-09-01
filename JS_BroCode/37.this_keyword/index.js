@@ -4,6 +4,7 @@
 class Car {
     // constructor =    A special method for assigning propertiES. Automatically called when creating an object.
     constructor(make, model, year, color){
+        // this = a reference to the object we are working with
         this.make = make;
         this.model = model;
         this.year = year;
@@ -12,22 +13,21 @@ class Car {
 
     // dont need function key word
     drive() {
-        console.log("You drive the car!");
+        console.log("You drive the", this.model);
     }
     brake() {
-        console.log("You step on the brakes!");
+        console.log("You step on the", this.model, "'s brakes!");
+    }
+    whatIsThis(){
+        return this;
     }
 }
 
 let car1 = new Car("Ford", "Mustang", 2022, "red");
 let car2 = new Car("Chevy", "Corvette", 2021, "blue");
 
-console.log(car1.make);
-console.log(car1.model);
-console.log(car1.year);
-console.log(car1.color);
+console.log(car1.whatIsThis());
+console.log(car2.whatIsThis());
 
-console.log(car2.make);
-console.log(car2.model);
-console.log(car2.year);
-console.log(car2.color);
+car1.drive();
+car2.drive();

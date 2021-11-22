@@ -14,13 +14,13 @@ const books = [
   {
     id: 2,
     author: "Audrey Chen",
-    title: "I Love Plushies to death",
-    img: "https://www.elmundoeats.com/wp-content/uploads/2021/02/FP-Quick-30-minutes-chicken-ramen.jpg",
+    title: "I Love Corgis to death",
+    img: "https://iheartdogs.com/wp-content/uploads/2021/02/Cute_Corgi_face-e1613588692370.jpg",
   },
 ];
 
 function BookList() {
-  // wont render objects if passed in
+  // wont render objects if passed in objects
   console.log(...books);
   return (
     <section className="booklist">
@@ -29,7 +29,7 @@ function BookList() {
         return (
           <Book
             key={book.id /*can pass in index, but index changes*/}
-            {...books} // use spread operator
+            {...book} // use spread operator
           />
         );
       })}
@@ -42,6 +42,7 @@ const Book = (props) => {
   // object destructuring
   // must use children for children prop
   const { img, title, author, children } = props;
+  console.log(props);
   return (
     <article className="book">
       <img src={img} alt="" />

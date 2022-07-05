@@ -1,0 +1,208 @@
+Postgre is the actuall database engine
+sql = structured query language
+    SELECT column-name FROM person
+    relational databawse
+
+Relational database is made up by tables
+Table - made up by Columns and Rows
+    Columns - specify the type of data
+    Rows    - store the actuall data
+
+Tables can have relation with other tables
+    Ex. A person has a car id, a car table also has car id
+
+PostgresSQL - object relational database management system
+
+Connect to Postgres Server:
+Server [localhost]:
+Database [postgres]:
+Port [5432]:
+Username [postgres]:
+Password for user postgres:
+
+To create database:
+CREATE DATABASE name;
+
+How to create table with Postgres:
+    CREATE TABLE table_name (
+        Column name + data type + constraints if any
+    )
+    
+    CREATE TABLE person (
+        id int,
+        fist_name VARCHAR(50),
+        last_name VARCHAR(50),
+        gender VARCHAR(6),
+        date_of_birth TIMESTAMP,
+    )
+
+Insert Data:
+    INSERT INTO person (
+        first_name,
+        last_name,
+        gender,
+        date_of_birth)
+    VALUES ('Anne', 'Smith', 'FEMALE', DATE '1988-01-09');
+
+see data:
+    SELECT column_name, column_name FROM table_name;
+
+drop table:
+    DROP TABLE person;
+
+add column:
+    ALTER TABLE table_name ADD column_name data_type constraints;
+
+sorting table returned:
+    SELECT column FROM table ORDER BY column;
+    SELECT column FROM table ORDER BY column ASC;
+    SELECT column FROM table ORDER BY column DESC;
+
+remove duplicate:
+    SELECT DISTINCT column FROM table ORDER BY column;
+
+filter data by conditions:
+    SELECT column FROM table WHERE column = value;
+    SELECT column FROM table WHERE column = value AND column = value;
+    SELECT column FROM table WHERE column = value AND (column = value or column = value);
+
+Comparison Operators:
+    SELECT 1 op 2;
+    Operators: =, >, >=, <. <=, <> (not equal)
+
+add limit and offsets to rows retrieved:
+    SELECT column FROM table LIMIT num;
+    SELECT column FROM table OFFSET num LIMIT num;
+    SELECT column FROM table OFFSET num LIMIT num;
+    SELECT column FROM table OFFSET num FETCH FIRST num ROWS ONLY;
+
+IN keyword:
+- select a range of values
+    SELECT column from table WHERE column IN (value, value, value...);
+
+BETWEEN keyword:
+    SELECT column from table WHERE column BETWEEN val AND val;
+
+LIKE keyword:
+    % = wild card matching character
+    _ = match single characters
+    SELECT column from table WHERE column LIKE '%something%morethings';
+    - kind off like regex but properly has its own syntax
+
+GROUP BY keyword:
+- have to select a second column
+    SELECT country_of_birth, COUNT(*) FROM person GROUP BY country_of_birth; 
+
+HAVING keyword:
+    SELECT column FROM table HAVING (condition)
+
+Aggregate functions compute a single result from a set of input values
+search up syntax for Aggregate functions
+
+MAX, MIN, AVG, SUM, ROUND
+    SELECT MAX(column) FROM table;
+    SELECT MIN(column) FROM table;
+    SELECT AVG(column) FROM table;
+    SELECT SUM(column) FROM table;
+    SELECT ROUND((column), num) FROM table;
+
+Ex. 
+    SELECT make, MAX(price) FROM car GROUP BY make, model;
+
+Arithmetic Operators:
+pretty much normal syntax+,-,*,-,^,!,%
+
+Alias, overwrite original column anme:
+    SELECT column, price  * .10 AS column_name FROM table;
+
+Coalesce:
+    SELECT COALESCE(1);
+    SELECT COALESCE(null, 1);
+    SELECT COALESCE(null, null, 1);
+    // if first few arguments are not present, try next argument
+    SELECT COALESCE(col, default_val) from table;
+
+NULLIF:
+    NULLIF(val, val); - return the first element if the first argument is the same as the second argument
+                    else return null
+    STOP dividing by 0 error:
+    SELECT COALESCE(10 / NULLIF(0, 0), 0); // return 0 instead of throwing an error
+
+TIMESTAMP + DATES:
+    NOW(), gives time stamp: Date, Time
+    NOW()::DATE, only gives Date
+    NOW()::TIME, only gives Time
+
+    SELECT NOW() (+)- INTERVAL '10 YEARS/DAYS/MONTHS'
+
+Primary Keys:
+The way to identify a row in the table such that this value in every row is unique
+
+Remove Primary Key:
+    ALTER TABLE table DROP CONSTRAINT primary_key_tag;
+Ex.
+    ALTER TABLE person DROP CONSTRAINT person_pkey;
+
+Add Primary Key:
+    ALTER TABLE table ADD PRIMARY KEY (id);
+// cannot add a primary key when the key are duplicated in the table
+
+Unique Constraint:
+- allow us to have unique value for a  given column
+// can only add unique contraint if all val of a column is unique
+    ALTER TABLE table ADD CONSTRAINT unique_primary_key_tag UNIQUE (column...);
+or 
+    ALTER TABLE table ADD UNIQUE (email); // postgres creates contraint name
+
+Check Constraint:
+    ALTER TABLE table ADD CONSTRAINT constraint_name CHECK (Conditions);
+
+Delete Records:
+    DELETE FROM table;
+    DELETE FROM table WHERE condition;
+
+Update Records:
+    UPDATE table SET column = new_val WHERE condition;
+    UPDATE table SET column = new_val, col = new_val, col = new_val WHERE condition;
+
+On Conflict Do Nothing:
+    INSERT INTO table (column...) VALUES (column...) ON CONFLICT (column) DO NOTHING; 
+    // column must be the primary key or have unique constraint
+
+On Conflict Do Update:
+    INSERT INTO table (column...) VALUES (column...) ON CONFLICT (column) 
+    DO UPDATE SET column = EXCLUDED.column, column = EXCLUDED.column...;
+    // EXCLUDED.column refers to the new column that is about to get inserted 
+
+Foreign Key, Joins, and Relationships;
+// this helps us establish relatioships between tables
+- Foreign Key is a Column that references a primary key from another table
+Ex.
+    car_id BIGINT REFERENCES car(id) UNIQUE (car_id)
+
+Adding Foreign Keys:
+    CREATE TABLE:
+        col vartype REFERENCES table (column),
+
+Deleting Foreign Keys:
+    - Use usual delete syntax, but doesn't work if the foreign key is still referenced
+
+INNER JOINS:
+- for combining 2 tables and only join if they have the same foreign key and the primary key
+    SELECT * FROM table0 JOIN table1 ON table0.foreign_key = table1.primary_key;
+
+LEFT JOINS:
+- combining 2 tables and join all the records from refenerced table to current table even if there isn't a match
+- join table even without a primary key and forieng key relationships
+    SELECT * FROM table0 LEFT JOIN table1 table0.foreign_key = table1.primary_key;
+
+Squences:
+    ALTER SEQUENCE seq RESTART WITH val;    
+
+Extensions:
+    SELECT * FROM pg_available_extensions;
+Install extensions:
+    CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
+
+UUID - generate universally unique identifiers

@@ -1,0 +1,58 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #272727;
+  color: #fff;
+  font-weight: 700;
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  width: 40%;
+  margin: 0 auto;
+}
+.main .main__paragraph1, .main .main__paragraph2 {
+  font-weight: 700;
+}
+.main .main__paragraph1:hover, .main .main__paragraph2:hover {
+  color: pink;
+}
+.main .main__paragraph2:hover {
+  color: #ff652f;
+}
+
+.list-style .list-style-none {
+  font-weight: 400;
+}
+.list-style .list-style-triangle {
+  font-weight: 500;
+}
+
+div.page ul li {
+  list-style-image: none;
+}
+div.page ul li.list-style-none {
+  list-style-image: none;
+}
+div.page ul li.list-style-triangle {
+  list-style-image: url("https://www.anderson.ucla.edu/images/2017/global/general/raquot-small-y.png");
+}
+@media (max-width: 800px) {
+  div.page ul li.list-style-triangle {
+    flex-direction: column;
+  }
+}
+
+.light {
+  background: white;
+  color: black;
+}
+
+/*# sourceMappingURL=index.css.map */

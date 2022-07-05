@@ -1,5 +1,12 @@
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, getDocs } from 'firebase/firestore';
+import {
+    getFirestore,
+    collection,
+    getDocs,
+    addDoc,
+    deleteDoc,
+    doc,
+} from 'firebase/firestore';
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
@@ -22,6 +29,37 @@ const db = getFirestore();
 const colRef = collection(db, 'books');
 
 // get collection data
-getDocs(colRef).then((snapshot) => {
-    console.log(snapshot.docs);
+getDocs(colRef)
+    .then((snapshot) => {
+        let book = [];
+        snapshot.docs.forEach((doc) => {
+            book.push({ ...doc.data(), id: doc.id });
+        });
+        console.log(book);
+    })
+    .catch((err) => {
+        console.log(err.message);
+    });
+
+// adding documents
+const addBookForm = document.querySelector('.add');
+addBookForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    addDoc(colRef, {
+        title: addBookForm.title.value,
+        author: addBookForm.author.value,
+    }).then(() => {
+        addBookForm.reset();
+    });
+});
+
+// deleting documents
+const deleteBookForm = document.querySelector('.delete');
+deleteBookForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const docRef = doc(db, 'books', deleteBookForm.id.value);
+
+    deleteDoc(docRef).then(() => {
+        deleteBookForm.reset();
+    });
 });

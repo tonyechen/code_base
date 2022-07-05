@@ -36,7 +36,7 @@ import { initializeApp } from 'fireabse/app';
 const app = initializeApp(firebaseConfig);
 ```
 
-## Set up firebase Database
+## Set up FireStore Database
 Go to Firestore Database and Create Firestore Database
 - Cloud Firestore is a NoSQL, document-oriented database.
 - You store data in documents, which are organized into collections
@@ -56,4 +56,27 @@ const colRef = collection(db, 'collection-name')
 ```
 collection() function takes in first the reference to the root FireStore instance, follow by the path names to the specific collection
 
+doc() function gets the reference to a doc, work similarly to collection()
 
+getDocs() get all the documents in a given collection, the function takes in a reference to a collection:
+```javascript
+getDocs(colRef)
+    .then((snapshot) => {
+        let book = [];
+        snapshot.docs.forEach((doc) => {
+            book.push({ ...doc.data(), id: doc.id });
+        });
+        console.log(book);
+    })
+    .catch((err) => {
+        console.log(err.message);
+    });
+```
+
+addDoc() add a new document to the specified collection reference and autimatically assign an ID
+```javascript
+addDoc(colRef, {
+        title: addBookForm.title.value,
+        author: addBookForm.author.value,
+    })
+```

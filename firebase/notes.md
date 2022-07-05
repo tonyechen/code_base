@@ -80,3 +80,7 @@ addDoc(colRef, {
         author: addBookForm.author.value,
     })
 ```
+
+## RealTime Collection data
+Subscribe to a collection
+onSnapshot() subscribes to a collection and receive real time updates of the collection data, it first takes in a reference to the collection and secondly a callback function that runs everytime there is a change to the collection

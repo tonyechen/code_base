@@ -7,6 +7,8 @@ import {
     deleteDoc,
     doc,
     onSnapshot,
+    query,
+    where,
 } from 'firebase/firestore';
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -44,8 +46,11 @@ getDocs(colRef)
     });
 */
 
+// queries
+const q = query(colRef, where('author', '==', 'patrick rothfuss'));
+
 // get real time collection data
-onSnapshot(colRef, (snapshot) => {
+onSnapshot(q, (snapshot) => {
     let book = [];
     snapshot.docs.forEach((doc) => {
         book.push({ ...doc.data(), id: doc.id });

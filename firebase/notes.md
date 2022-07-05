@@ -82,5 +82,26 @@ addDoc(colRef, {
 ```
 
 ## RealTime Collection data
-Subscribe to a collection
-onSnapshot() subscribes to a collection and receive real time updates of the collection data, it first takes in a reference to the collection and secondly a callback function that runs everytime there is a change to the collection
+Subscribe to a collection or document
+onSnapshot() subscribes to a collection/doc and receive real time updates of the data, it first takes in a reference to the data and secondly a callback function that runs everytime there is a change to the collection
+
+## Firebase Query
+query() - just like sql query in a way, use in conjunction with where(), a function that takes in 3 arguments: field_name, query_operators, value
+
+query operators:
+- < less than
+- <= less than or equal to
+- == equal to
+- {>} greater than
+- {>=} greater than or equal to
+- != not equal to
+- array-contains
+- array-contains-any
+- in
+- not-in
+```javascript
+import { query, where } from 'firebase/firestore';
+...
+const q = query(colRef, where('author', '==', 'patrick rothfuss'));
+```
+query() returns instances of the documents, also work with onSnapshot() to only fire when specific documents change

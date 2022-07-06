@@ -19,7 +19,8 @@ import {
     getAuth,
     createUserWithEmailAndPassword,
     signOut,
-    signInWithEmailAndPassword
+    signInWithEmailAndPassword,
+    onAuthStateChanged,
 } from 'firebase/auth';
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -62,7 +63,7 @@ getDocs(colRef)
 const q = query(colRef, orderBy('createdAt'));
 
 // get real time collection data
-onSnapshot(q, (snapshot) => {
+const unsubCol = onSnapshot(q, (snapshot) => {
     let book = [];
     snapshot.docs.forEach((doc) => {
         book.push({ ...doc.data(), id: doc.id });
@@ -97,7 +98,7 @@ deleteBookForm.addEventListener('submit', (e) => {
 // get a single docuent
 const docRef = doc(db, 'books', 'aQPbFvZYn60zQ6CplVg0');
 
-onSnapshot(docRef, (doc) => {
+const unsubDoc = onSnapshot(docRef, (doc) => {
     console.log(doc.data(), doc.id);
 });
 
@@ -141,7 +142,7 @@ const logoutButton = document.querySelector('.logout');
 logoutButton.addEventListener('click', () => {
     signOut(auth)
         .then(() => {
-            console.log('the user signed out');
+            //console.log('the user signed out');
         })
         .catch((err) => {
             console.log(err.message);
@@ -155,5 +156,25 @@ loginForm.addEventListener('submit', (e) => {
     const email = loginForm.email.value;
     const password = loginForm.password.value;
 
-    signInWithEmailAndPassword(auth, email, password);
+    signInWithEmailAndPassword(auth, email, password)
+        .then((cred) => {
+            //console.log('user logged in: ', cred.user);
+        })
+        .catch((err) => {
+            err.message();
+        });
+});
+
+// subscribing to auth changes
+const unsubAuth = onAuthStateChanged(auth, (user) => {
+    console.log('user status changed: ', user);
+});
+
+// unsubscribing from change that matches selectors.
+const unsubButton = document.querySelector('.unsub');
+unsubButton.addEventListener('click', () => {
+    console.log('unsubscribing')
+    unsubCol();
+    unsubDoc();
+    unsubAuth();
 });

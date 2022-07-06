@@ -195,3 +195,14 @@ Sign out User:
 import { signOut } from 'firebase/auth';
 signOut(auth);
 ```
+
+## Subscribing to Auth Changes
+```javascript
+import { onAuthStateChanged } from 'firebase/auth';
+onAuthStateChanged(auth, callback)
+```
+onAuthStateChanged() fire the callback everytime there is an Auth Change
+
+## Unsubscribing from Subscribtions
+
+All Subscription function return an unsubscribe function. Invoke the returned function to unsubscribe.

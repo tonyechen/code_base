@@ -202,6 +202,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 onAuthStateChanged(auth, callback)
 ```
 onAuthStateChanged() fire the callback everytime there is an Auth Change
+the Promise object is null when user is signed out.
 
 ## Unsubscribing from Subscribtions
 

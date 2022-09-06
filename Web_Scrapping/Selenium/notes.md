@@ -9,6 +9,10 @@ WebDriver is an open source tool for automated testing of webapps across many br
 ## How to set up webdriver?
 Download the driver for the appropriate browser and configure PATH to the location of where the driver.exe file is stored
 
+## Context Manager
+---
+Context managers allow you to allocate and release resources precisely when you want to. The most widely used example of context managers is the **with** statement. Suppose you have two related operations which you’d like to execute as a pair, with a block of code in between. Context managers allow you to do specifically that. At the very least a context manager has an *\_\_enter\_\_* and *\_\_exit\_\_* method defined.
+
 ## Implicit Waiting
 Some webpages will take time to load. Implicit Wait directs the Selenium WebDriver to wait for a certain measure of time before throwing an exception. Once this time is set, WebDriver will wait for the element before the exception occurs. Once the command is in place, Implicit Wait stays in place for the entire duration for which the browser is open.
 ````python
@@ -29,6 +33,7 @@ WebDriverWait(driver, 30).until(
 ````
 
 ## Find element
+---
 ````python
 element = driver.find_element(BY.type, "<name>")
 ````
@@ -42,9 +47,20 @@ BY class can be imported from Selenium and has the following types:
 - CLASS_NAME = "class name"
 - CSS_SELECTOR = "css selector"
 
+### Find by CSS selector
+reference: https://www.w3schools.com/cssref/css_selectors.asp
+
 ## Sending Keys:
+---
 This simulates typing into the element:
 ````python
 element.send_keys('hello world!')
 ````
-Can import the KEY class from Selenium to 
+Can import the KEY class from Selenium to input non letter keys like 'Ctrl', 'BACKSPACE', etc
+
+## Getting value of attributes of an element
+````python
+element.get_attributes("<attribute_name>")
+````
+
+

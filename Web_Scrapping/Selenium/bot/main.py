@@ -7,3 +7,5 @@ with Booking(teardown=False) as bot:
     bot.select_dates('2022-09-17', '2022-09-21')
     bot.select_adults(2)
     bot.click_search()
+
+    bot.apply_filtration()

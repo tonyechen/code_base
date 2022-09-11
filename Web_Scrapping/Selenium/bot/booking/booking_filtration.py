@@ -9,13 +9,29 @@ class BookingFiltration:
     def __init__(self, driver:WebDriver) -> None:
         self.driver = driver
 
-    def apply_star_rating(self, *star_value):
+    def apply_star_rating(self, *star_values):
         star_filtration_box = self.driver.find_element(
             By.CSS_SELECTOR, 
             'div[data-filters-group="class"]')
-        star_filtration_container = star_filtration_box.find_element(
+
+        for star_value in star_values:
+            star_filtration_container = star_filtration_box.find_element(
+                By.CSS_SELECTOR, 
+                f'div[data-filters-item="class:class={star_value}"]'
+                )
+            star_filtration_element = star_filtration_container.find_element(By.TAG_NAME, 'label')
+            star_filtration_element.click() 
+
+    def sort_price_lowest_first(self):
+        filter_element = self.driver.find_element(
             By.CSS_SELECTOR, 
-            f'div[data-filters-item="class:class={star_value}"]'
+            "button[data-testid='sorters-dropdown-trigger']"
             )
-        star_filtration_element = star_filtration_container.find_element(By.TAG_NAME, 'label')
-        star_filtration_element.click()
+        filter_element.click()
+
+        price_lo_to_hi_element = self.driver.find_element(
+            By.CSS_SELECTOR,
+            'button[data-id="price"]'
+        )
+
+        price_lo_to_hi_element.click()

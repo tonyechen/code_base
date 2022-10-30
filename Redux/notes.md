@@ -1,0 +1,43 @@
+# Redux Notes :D
+## The Basics:
+### What is it?
+- A Complex State Management Tool with a single store as CDS
+
+## Reducers
+- Manages the State and Returns the newly updated stated
+
+## Actions
+- Actions have 2 properties type: which is a unique identifier and payload which has data
+
+## Dispatch
+- dispatch is used to send actions to update the data
+
+## Installation:
+redux core:
+```
+npm i redux
+```
+
+redux and react integration layer:
+```
+npm i react-redux
+```
+
+redux toolkit - redux development library
+```
+npm i @reduxjs/roolkit
+```
+
+## Initialize Store:
+documentation(redux toolkit): https://redux-toolkit.js.org/introduction/getting-started
+- the `createStore` function has been deprecated and it is recommended using the `configureStore` method of the @reduxjs/toolkit package, which replaces createStore. `
+configureStore` from Redux Toolkit is an improved version of `createStore` that simplifies setup and helps avoid common bugs.
+
+- `configureStore` - return a configured redux store. Accept Parameters: reducers, middleware, devTools, preloadedState, and enhancers.
+    - reducer: 
+
+- `useSelector` - A hook to access the redux store's state. This hook takes a selector function as an argument. The selector is called with the store state. This hook takes an optional equality comparison function as the second parameter that allows you to customize the way the selected state is compared to determine whether the component needs to be re-rendered.
+
+- `useDispatch` - A hook to access the redux dispatch function. The dispatch function takes in an action object, which takes in an object that contains `type` and `payload`. `type` defines the name of the action, `payload` contains the data for the action
+
+- `createSlice` - A function that accepts an initial state, an object of reducer functions, and a "slice name", and automatically generates action creators and action types that correspond to the reducers and state. Basically create a slice of the state and the automatically generate the actions and return a 

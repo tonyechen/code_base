@@ -179,6 +179,8 @@ unique url to connect to database:
 ```
 
 # Pydantic Models
+Really nice graph that explain the relationship between pydantic models and sqlalchemy orm model:
+![alt text](https://d2o1p3wqepjvn9.cloudfront.net/media/uploads/2021/03/20/fastapi-request-response.png)
 
 # Authentication and Users
 

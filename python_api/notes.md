@@ -19,7 +19,7 @@ def root():
 ```python
 def decorator(func):
     def wrapper():
-        foo()
+        func()
         print("!")
     return wrapper
 
@@ -34,7 +34,7 @@ foo()
 ```python
 def decorator(func):
     def wrapper():
-        foo()
+        func()
         print("!")
     return wrapper
 
@@ -112,12 +112,71 @@ FastAPI auto-generate documentation for api routes:
 ```
 https://localhost:8000/docs
 ```
+and
+```
+https://localhost:8000/redoc
+```
+# Databases - PostgreSQL
+SQL Guide: https://www.w3schools.com/sql/default.asp
+## Tables:
+- represent a subject or event in an application
+    - can have tables for users, or products, or purchases.
+    - These tables will have simple relationship with each other
+    - Design the relationship between the tables beforehand so we can have an efficient database
+## Columns Vs Rows:
+- cols of a talbe represent a different attribute
+- rows represent different entries in the table
 
-# Databases
+## Datatypes
+- Databases have datatypes just like programming language
+
+## Primary Key
+- a column or agroup of columns that uniquely identifies each row in a table
+- Table can have one and only one primary key
+
+## Unique Constraints
+- A UNIQUE constraint can be applied to any column to make sure every record has a unique value for that column
+
+## Null Constraints
+- By default, when adding a new entry to a database, any column can be left lanck. When a column is left blank, it has a null value
+- If you need column to be properly filled in to create a new record, a NOT NULL constraint can be added to the column to ensure that the column is never left blank
+
+## AS keyword
+- use as to rename column name when retrieving data
+```SQL
+SELECT id as product_id, name as product_name, price as product_price FROM products;
+```
+
+## WHERE keyword
+- filter results, 
+Operators: https://www.w3schools.com/sql/sql_where.asp
+
+## ORDER BY
+- order the elements hehe
+
+## RETURNING
+- use in conjunction with INSERT INTO to return the updated columns
 
 # Python and Raw SQL
-
+- Need Postgres Driver to integrate postgres with python, this apply to any kind of database we are using
+- In this course we're using Psycopg
+documentation: https://www.psycopg.org/docs/
 # ORMS
+link to very useful article: https://www.freecodecamp.org/news/what-is-an-orm-the-meaning-of-object-relational-mapping-database-tools/
+- aka Object Relational Mapping
+- ORM is a layer of absraction that sits between the database and us
+- we can perform all database operations through traditional python code.
+
+## SQLAlchemy
+- one of the most popular python ORMs
+- it is a standalone library and has no association with FastAPI. It can be used with any other python web frameworks or any python based application
+
+documentation with fastapi: https://fastapi.tiangolo.com/tutorial/sql-databases/
+
+unique url to connect to database:
+```
+<database>://<username>:<password>@<ip-address/hostname>/<database_name>
+```
 
 # Pydantic Models
 

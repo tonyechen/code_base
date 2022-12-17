@@ -13,3 +13,9 @@ VALUES( 'first post', 'some interesting content' );
 
 INSERT INTO posts(title, content)
 VALUES( 'second post', 'some other interesting content' );
+
+INSERT INTO users(email, password)
+VALUES('anthonychen@gmail.com', '123456');
+
+INSERT INTO users(email, password)
+VALUES('test@gmail.com', '123456');

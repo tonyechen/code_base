@@ -107,6 +107,16 @@ Setting Default for a path:
 @app.post('/posts', status_code=status.HTTP_404_NOT_FOUND)
 ```
 
+## Router
+```python
+from fastapi import APIRouter
+
+router = APIRouter(prefix='/posts', tags=['Posts'])
+
+@router.get('/')
+def get_posts():
+```
+
 ## Auto Documentation:
 FastAPI auto-generate documentation for api routes:
 ```
@@ -182,7 +192,33 @@ unique url to connect to database:
 Really nice graph that explain the relationship between pydantic models and sqlalchemy orm model:
 ![alt text](https://d2o1p3wqepjvn9.cloudfront.net/media/uploads/2021/03/20/fastapi-request-response.png)
 
+- can create request model and response model. They have the same structure
+
 # Authentication and Users
+FastApi security intro link: https://fastapi.tiangolo.com/tutorial/security/oauth2-jwt/
+## Hashing User password:
+```
+pip install passlib[bcrypt]
+```
+```python
+from passlib.context import CryptContext
+
+pwd_context = CryptContext(schemes=['bcrypt'], deprecated='auto')
+
+def hash(password: str):
+    return pwd_context.hash(password)
+```
+
+## JWT Token
+offical explanation: https://jwt.io/introduction
+- in simple terms, it's an ecoded string for securely transmitting information between parties as a JSON object. It can be verified and trusted because it is digitally signed.
+- very helpful graph: https://www.youtube.com/watch?v=0sOvCWFmrtA&list=PLbYOMPK70mxpvCXIY9wFhC9zbimybQD6z&index=34&t=24282s
+
+Authentication Flow:
+- the client tries to log in, with correct username and password, the server/api will generate and send back a signed JWT token
+- the client then sends request with the provided JWT token in the header for anything that require to be logged in
+- the server/api verify that the token is valid before sending back the data
+
 
 # SQL Relationships
 

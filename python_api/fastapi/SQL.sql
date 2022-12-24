@@ -2,6 +2,7 @@
 
 -- CREATE TABLE IF NOT EXISTS posts(
 --     id SERIAL PRIMARY KEY,
+--     user_id FOREIGN KEY REFERENCES users(id)
 --     title VARCHAR(30) NOT NULL DEFAULT 'Untitled Post',
 --     content VARCHAR NOT NULL DEFAULT 'Empty Content',
 --     published BOOLEAN NOT NULL DEFAULT true,

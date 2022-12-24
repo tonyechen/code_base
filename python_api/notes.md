@@ -219,6 +219,11 @@ Authentication Flow:
 - the client then sends request with the provided JWT token in the header for anything that require to be logged in
 - the server/api verify that the token is valid before sending back the data
 
+3 things that we need:
+1. the secret key
+2. algorithm
+3. expiration time
+
 
 # SQL Relationships
 

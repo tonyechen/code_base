@@ -1,12 +1,13 @@
-from .. import models, schema
+from .. import models, schema, oauth2
 from fastapi import FastAPI, status, HTTPException, Response, Depends, APIRouter
 from ..database import Session, get_db
 from typing import List
 
+
 router = APIRouter(prefix='/posts', tags=['Posts'])
 
 @router.get('/', response_model=List[schema.Post])
-def get_posts(db: Session = Depends(get_db)):
+def get_posts(db: Session = Depends(get_db), current_user: int = Depends(oauth2.get_current_user)):
 
     posts = db.query(models.Post).all()
     # RAW SQL
@@ -15,7 +16,7 @@ def get_posts(db: Session = Depends(get_db)):
     return posts
 
 @router.get("/{id}", response_model=schema.Post)
-def get_post(id: int, db: Session = Depends(get_db)):
+def get_post(id: int, db: Session = Depends(get_db), current_user: int = Depends(oauth2.get_current_user)):
     post = db.query(models.Post).filter(models.Post.id == id).first()
     print(post)
 
@@ -30,8 +31,9 @@ def get_post(id: int, db: Session = Depends(get_db)):
     return post
 
 @router.post("/", status_code=status.HTTP_201_CREATED, response_model=schema.Post)
-def create_posts(post: schema.PostCreate, db: Session = Depends(get_db)):
+def create_posts(post: schema.PostCreate, db: Session = Depends(get_db), current_user: int = Depends(oauth2.get_current_user)):
     
+    print(current_user.email)
     new_post = models.Post(**post.dict())
     # equivalent to:
     # new_post = models.Post(title=post.title, content=post.content, published=post.published)
@@ -50,7 +52,7 @@ def create_posts(post: schema.PostCreate, db: Session = Depends(get_db)):
     return new_post
 
 @router.delete('/{id}', status_code=status.HTTP_204_NO_CONTENT)
-def delete_post(id: int, db: Session = Depends(get_db)):
+def delete_post(id: int, db: Session = Depends(get_db), current_user: int = Depends(oauth2.get_current_user)):
     deleted_post = db.query(models.Post).filter(models.Post.id == id)
     
     # RAW SQL
@@ -67,7 +69,7 @@ def delete_post(id: int, db: Session = Depends(get_db)):
     return Response(status_code=status.HTTP_204_NO_CONTENT)
 
 @router.put("/{id}", response_model=schema.Post)
-def update_post(id: int, post: schema.PostCreate, db: Session = Depends(get_db)):
+def update_post(id: int, post: schema.PostCreate, db: Session = Depends(get_db), current_user: int = Depends(oauth2.get_current_user)):
     post_query = db.query(models.Post).filter(models.Post.id == id)
 
     # RAW SQL

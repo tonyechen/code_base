@@ -5,6 +5,8 @@ import time
 from . import models
 from .database import engine
 from .routers import post, user, auth
+from .config import settings
+
 
 # Create the tables before the app start
 models.Base.metadata.create_all(bind=engine)

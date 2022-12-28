@@ -2,23 +2,33 @@ from .. import models, schema, oauth2
 from fastapi import FastAPI, status, HTTPException, Response, Depends, APIRouter
 from ..database import Session, get_db
 from typing import List, Optional
+from sqlalchemy import func
 
 
 router = APIRouter(prefix='/posts', tags=['Posts'])
 
-@router.get('/', response_model=List[schema.Post])
+#@router.get('/', response_model=List[schema.Post])
+@router.get('/', response_model=List[schema.PostOut])
 def get_posts(db: Session = Depends(get_db), current_user: int = Depends(oauth2.get_current_user), limit: int = 10, skip: int = 0, search: Optional[str] = ""):
+    
+    # raw sql:
+    #SELECT * FROM posts LEFT OUTER JOIN votes ON votes.post_id = posts.id
+    
+    #posts = db.query(models.Post).filter(models.Post.title.contains(search)).limit(limit).offset(skip).all()
+    
+    posts = db.query(models.Post, func.count(models.Vote.post_id).label("votes")).join(models.Vote, models.Vote.post_id == models.Post.id, isouter=True).group_by(models.Post.id).filter(models.Post.title.contains(search)).limit(limit).offset(skip).all()
 
-    posts = db.query(models.Post).filter(models.Post.title.contains(search)).limit(limit).offset(skip).all()
     # RAW SQL
     # cursor.execute('SELECT * FROM posts;')
     # posts = cursor.fetchall()
     return posts
 
-@router.get("/{id}", response_model=schema.Post)
+@router.get("/{id}", response_model=schema.PostOut)
 def get_post(id: int, db: Session = Depends(get_db), current_user: int = Depends(oauth2.get_current_user)):
-    post = db.query(models.Post).filter(models.Post.id == id).first()
-    print(post)
+    # post = db.query(models.Post).filter(models.Post.id == id).first()
+    # print(post)
+
+    post = db.query(models.Post, func.count(models.Vote.post_id).label("votes")).join(models.Vote, models.Vote.post_id == models.Post.id, isouter=True).group_by(models.Post.id).filter(models.Post.id == id).first()
 
     # RAW SQL
     # cursor.execute('SELECT * from posts Where id = %s', (str(id),))

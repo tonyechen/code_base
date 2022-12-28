@@ -4,7 +4,7 @@ from psycopg2.extras import RealDictCursor
 import time
 from . import models
 from .database import engine
-from .routers import post, user, auth
+from .routers import post, user, auth, vote
 from .config import settings
 
 
@@ -45,3 +45,4 @@ async def root():
 app.include_router(post.router)
 app.include_router(user.router)
 app.include_router(auth.router)
+app.include_router(vote.router)

@@ -167,6 +167,28 @@ Operators: https://www.w3schools.com/sql/sql_where.asp
 ## RETURNING
 - use in conjunction with INSERT INTO to return the updated columns
 
+## FOREIGN KEY
+- constraint that references column of another table 
+```SQL
+CREATE TABLE Orders (
+    OrderID int NOT NULL PRIMARY KEY,
+    OrderNumber int NOT NULL,
+    PersonID int FOREIGN KEY REFERENCES Persons(PersonID)
+);
+```
+
+## Composite Keys
+- primary key spans multiple columns
+```SQL
+CREATE TABLE student
+    (rollNumber INT, 
+    name VARCHAR(30), 
+    class VARCHAR(30), 
+    section VARCHAR(1), 
+    mobile VARCHAR(10),
+    PRIMARY KEY (rollNumber, mobile));
+```
+
 # Python and Raw SQL
 - Need Postgres Driver to integrate postgres with python, this apply to any kind of database we are using
 - In this course we're using Psycopg
@@ -224,15 +246,68 @@ Authentication Flow:
 2. algorithm
 3. expiration time
 
-
-# SQL Relationships
-
-# Vote/Like system
-
 # Database Migration w/ Alembic
+- database migrations allow us to incrementally track changes to database schema and rollback changes to any point in time, kind of like git but for databases
+- we will use Alemebic which is built for sqlalchemy to make changes to our database
+
+```shell
+alembic revision -m "message"
+```
+generates a python file within versions that include `def upgrade` and `def downgrade` where upgrade handle the changes and downgrade handle rollback
+
+```shell
+alembic upgrade/downgrade <revision ID>
+```
+update current version to the targeted version
 
 # Deployment
+## CORS:
+- Cross Origin Resource Sharing(CORS) allows you to make requests from a web browser on one domain to a server on a different domain
+- By default our API will only allow web browsers running on the same domain as our server to make requests to it
+- an server can configure to only allow specfic CRUD method,  headers, and/or origins
 
+## Deploy on a Ubantu Linux Server
+To connext to a ubantu virtual machine (different for different providers):
+```shell
+ssh root@ip.address
+```
+
+To update packages, run:
+```
+sudo apt update && sudo apt upgrade -y
+```
+
+Install Python:
+```
+sudo apt install python
+```
+
+Install pip:
+```
+sudo apt install python3-pip
+```
+
+Install virtualenv:
+```
+sudo pip install virtualenv
+```
+
+Install postgres:
+```
+sudo apt install postgresql postgresql-contrib -y
+```
+
+When postgres is installed on Ubuntu it uses Peer Authentication and it uses the user that is currently logged into the ubuntu machine to log into the postgres 
+
+Look at all the users that have been installed:
+```
+sudo cat /etc/passwd
+```
+
+Change into user postgres
+```
+su - postgres
+```
 # Docker
 
 # Testing

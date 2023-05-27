@@ -138,8 +138,8 @@ $$\sum_{i=1}^n-p_ilog_2(p_i)$$
 ### Naive Bayes
 - based on Bayes Theorm that is used to solve classification problems by following a probabilistic appraoch
 - It is based on the idea that the predictor variable in a Machine Learning model are independent of each other
-$$P(H|Multiple Evidence) = P
-(C1|H)*P(C2|H)...*P(Cn|H) * P(H) / P(Multiple Evidence) $$
+
+$$P(H|Multiple Evidence) = P(C1|H)*P(C2|H)...*P(Cn|H) * P(H) / P(Multiple Evidence) $$
 
 ### KNN,K Nearest Neighbour
 - a supervised learning algorithm that classifies a new data point into the target class, depending on the features of it's neighbouring data 
